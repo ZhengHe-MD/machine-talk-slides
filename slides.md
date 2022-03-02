@@ -127,7 +127,7 @@ def utter_next_sentence(input_sentence: str) -> str:
 
 ## → 机器学习 🤖
 
-<img src="https://i.pinimg.com/736x/ba/9a/51/ba9a51b3a158b19447cba1f14c87837b.jpg" width="350" />
+<img src="/machine-learning.jpg" width="350" />
 
 ---
 
@@ -230,7 +230,7 @@ layout: two-cols
 
 ::right::
 
-<img src="https://miro.medium.com/max/600/1*DHootdFfDVov_7BDt35-gA.png"/>
+<img src="/convex-optimization.png"/>
 
 ---
 
@@ -238,7 +238,7 @@ layout: two-cols
 
 [The Unreasonable Effectiveness of Recurrent Neural Networs](http://karpathy.github.io/2015/05/21/rnn-effectiveness/)
 
-![RNN](https://miro.medium.com/max/1200/1*QFOzE0TEMFERg3G5_5HiPA.png)
+![RNN](/rnn.png)
 
 ---
 
