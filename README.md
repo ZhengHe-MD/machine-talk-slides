@@ -1,11 +1,3 @@
-# Welcome to [Slidev](https://github.com/slidevjs/slidev)!
+# Machine talk slides
 
-To start the slide show:
-
-- `npm install`
-- `npm run dev`
-- visit http://localhost:3030
-
-Edit the [slides.md](./slides.md) to see the changes.
-
-Learn more about Slidev on [documentations](https://sli.dev/).
+slides about how to make machine talk, or how a modern language model is trained in general without going into any details, from an internal tech share
