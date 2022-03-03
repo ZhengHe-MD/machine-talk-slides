@@ -130,6 +130,8 @@ def utter_next_sentence(input_sentence: str) -> str:
 <img src="/machine-learning.jpg" width="350" />
 
 ---
+layout: two-cols
+---
 
 # 机器识字
 
@@ -143,6 +145,10 @@ def utter_next_sentence(input_sentence: str) -> str:
 ## 常见做法
 - 建立词表 -> vocabulary
 - 向量编码 -> One-hot encoding
+
+::right::
+
+![one-hot-encoding](one-hot-encoding.jpg)
 
 ---
 
@@ -191,10 +197,10 @@ graph RL
 ```python
 def train(samples):
     for sample_input, sample_value in samples:
-        # 前向传播
+        # 前向传播：计算
         predicted_value = M(sample_input)
         loss = distance(predicted_value, sample_value)
-        # 反向传播
+        # 反向传播：求导
         dM = backward_propagation(loss, M)
         M -= dM
 ```
