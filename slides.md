@@ -148,7 +148,7 @@ layout: two-cols
 
 ::right::
 
-![one-hot-encoding](one-hot-encoding.jpg)
+![one-hot-encoding](/one-hot-encoding.jpg)
 
 ---
 
