@@ -34,9 +34,13 @@ drawings:
 1. 🗣 第一个人随意说一句话
 2. 🔗 剩下的人轮流接一句话
 
+<v-click>
+
 ## 问题
 
 * 每个人如何决定下句说什么
+
+</v-click>
 
 ---
 layout: center
@@ -107,16 +111,20 @@ def utter_next_sentence(input_sentence: str) -> str:
 "好世界."
 ```
 
-问：「每次说一句话」与「每次说一个字」的区别
+> 🤔 「每次说一句话」与「每次说一个字」有什么区别
 
 ---
 
 # 离我们的期望有多远？
 
+<v-clicks>
+
 - 人能说的句子无法穷举
 - 人会用多种方式表达单个意思
 - 人有记忆，能在对话中关联上下文
 - ...
+
+</v-clicks>
 
 ---
 layout: two-cols
@@ -188,15 +196,23 @@ def utter_next_sentence(input_sentence: str) -> str:
 
 # 如何实现
 
+<v-clicks>
+
 - 💡 人是如何学习语言的？
 - 🗣️ 可不可以直接跟机器说，让它学？ 
 - 📖 可不可以直接给机器书，让它看？
+
+</v-clicks>
+
+<v-click>
 
 <br>
 
 ### → 机器学习 🤖
 
 <img src="/machine-learning.jpg" width="350" />
+
+</v-click>
 
 ---
 
