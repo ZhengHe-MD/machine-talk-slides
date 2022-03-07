@@ -21,7 +21,7 @@ drawings:
   persist: false
 ---
 
-# 让机器说人话
+# 让机器说话
 
 技术中台 - 郑鹤
 
@@ -34,16 +34,16 @@ drawings:
 1. 🗣 第一个人随意说一句话
 2. 🔗 剩下的人轮流接一句话
 
-## 思考
+## 问题
 
-* 说话人如何决定下句说什么
-* 与单个人说多句有什么区别
-* 如果想让「让机器说人话」...
-* ...
+* 每个人如何决定下句说什么
 
+---
+layout: center
+---
 
-
-> 简化问题：只考虑文本不考虑语音
+# 如何实现「让机器人接话」？
+只考虑文本不考虑语音
 
 ---
 layout: two-cols
@@ -119,37 +119,100 @@ def utter_next_sentence(input_sentence: str) -> str:
 - ...
 
 ---
+layout: two-cols
+---
 
-# 如何解决
+<style>
+.col-right {
+    margin-left: 10px !important;
+}
+</style>
 
-- 💡 思考人是如何学习语言的？
-- 📖 可不可以直接丢给机器一堆书，让它看？
+# 每次说一个字
 
-## → 机器学习 🤖
+```python
+char_level_model = load("model.pt")
+
+def utter_next_word(input_word: str) -> str:
+    next_word = char_level_model.predict(input_word)
+    return next_word
+```
+
+```sh
+> utter_next_word("你")
+"好"
+> utter_next_word("你")
+"是"
+> utter_next_word("你")
+"们"
+> utter_next_word("你")
+"的"
+```
+
+<uim-rocket class="text-3xl text-black-400 mx-2" /> 实现一个「字级别模型」(char-level model)
+
+> 词级别 (word-level) 模型原理类似。
+
+::right::
+
+# 每次说一句话
+
+```python
+char_level_model = load("model.pt")
+
+def utter_next_sentence(input_sentence: str) -> str:
+    sentence = []
+    
+    prev_word = input_sentence[-1]
+    next_word = char_level_model.predict(prev_word)
+    sentence.append(next_word)
+    while next_word != EOF:
+        next_word = char_level_model.predict(prev_word)
+        sentence.append(next_word)
+        
+    return ''.join(sentence)
+```
+
+```sh
+> utter_next_sentence("你好")
+"很高兴认识你"
+> utter_next_sentence("你好")
+"认识你很高兴"
+> utter_next_sentence("我深深地爱着你，你")
+"却爱着另一个 xx"
+```
+
+
+
+---
+
+# 如何实现
+
+- 💡 人是如何学习语言的？
+- 🗣️ 可不可以直接跟机器说，让它学？ 
+- 📖 可不可以直接给机器书，让它看？
+
+<br>
+
+### → 机器学习 🤖
 
 <img src="/machine-learning.jpg" width="350" />
 
----
-layout: two-cols
 ---
 
 # 机器识字
 
 在给机器看书之前，得先教会它怎么识字？
 
-## 要求
-- 字与字不同
-- 一定的维度
-- 支持浮点运算
+- 要求：字与字不同；一定的维度；支持浮点运算；
+- 做法：建立词表；向量编码 → One-hot encoding；
 
-## 常见做法
-- 建立词表 -> vocabulary
-- 向量编码 -> One-hot encoding
+![one-hot-encoding](/one-hot-encoding-char-level.png)
 
-::right::
+> 🤔 如果是中文会有什么问题？
 
-![one-hot-encoding](/one-hot-encoding.jpg)
-
+---
+layout: two-cols
 ---
 
 # 语言建模
@@ -166,14 +229,45 @@ layout: two-cols
 - "go" -> "func"
 - "if err" -> "!= nil"
 
+::right::
+
+<br>
+<br>
+<br>
+<br>
+
+![language-model](/language-model-example.png)
+
 ---
 layout: two-cols
 ---
 
-# 如何学习
+# 模型究竟是什么
+
+- 是一个巨大的函数
+- 参数可以达到万亿
+- 构成的函数都可导
+- 输入是一组向量 <br>(如 "Hello." 对应的 one-hot encoding)
+- 输出是一组向量 <br>(如 "world!" 对应的 one-hot encoding)
+- 通过计算导数，不断地调整函数参数 <br> → 最终收敛到 (局部) 最优解
+
+
+::right::
+
+<img src="/convex-optimization.png"/>
+
+---
+layout: two-cols
+---
+
+# 如何学习 → 训练模型
 
 - 样本输入："Hello, "
 - 样本值：  "world!"
+
+<br>
+
+### 前向传播
 
 ```mermaid
 graph LR
@@ -181,18 +275,22 @@ graph LR
     M --生成--> y_hat[预测值]
 ```
 
-##### → 前向传播
+
+### 反向传播
 
 ```mermaid
 graph RL
     dy["distance(样本值 - 预测值)"] --调整--> M[模型]
 ```
 
-##### → 反向传播
 
 ::right::
 
-# 伪代码
+<br>
+<br>
+<br>
+
+### 伪代码
 
 ```python
 def train(samples):
@@ -219,24 +317,6 @@ def train(samples):
 | ackers need t | o understand t |
 | ckers need to | understand th |
 | ... | ... |
-
----
-layout: two-cols
----
-
-# 模型「M」
-
-- 是一个巨大的函数
-- 参数可以达到万亿
-- 构成的函数都可导
-- 输入是一组向量 <br>(如 "Hello." 对应的 one-hot encoding)
-- 输出是一组向量 <br>(如 "world!" 对应的 one-hot encoding)
-- 通过导数，不断地调整函数参数 <br> → 达到收敛
-
-
-::right::
-
-<img src="/convex-optimization.png"/>
 
 ---
 

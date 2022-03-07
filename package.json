@@ -10,5 +10,8 @@
     "@slidev/theme-default": "*",
     "@slidev/theme-seriph": "*"
   },
-  "name": "machine-talk-slides"
+  "name": "machine-talk-slides",
+  "devDependencies": {
+    "@iconify-json/uim": "^1.1.1"
+  }
 }

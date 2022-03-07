@@ -60,6 +60,13 @@
   dependencies:
     "@iconify/types" "^1.0.12"
 
+"@iconify-json/uim@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@iconify-json/uim/-/uim-1.1.1.tgz#6dbff52a1c0e2bea52680d5ec913e8a3c2c54a1d"
+  integrity sha512-MoOZx/PJ74M4FpE2v4+qehBfN/05SXExZnw5NuXlmxzeKB2FXGMkjhEhMDvFg6vS2h4S54GxZng+zlLNZy3vIw==
+  dependencies:
+    "@iconify/types" "^1.0.12"
+
 "@iconify/types@^1.0.12":
   version "1.0.12"
   resolved "https://registry.yarnpkg.com/@iconify/types/-/types-1.0.12.tgz#839f1f784b7030b94482d51996570f4dbd7d6796"
