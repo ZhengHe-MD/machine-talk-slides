@@ -348,6 +348,8 @@ def train(samples):
 
 将《三国演义》原文，约 1MB，让机器从 0 - 1 学习：
 
+<v-click>
+
 ```
 太史云长闻之，即遣人马往全徐聚及关缚。斗时一将军马，欲取平郡；
 操轻勒弃衣弓甲，来夜身中。原马玄德回寨新中，勒法东飞未还，因虽带明一林而到。
@@ -361,11 +363,15 @@ def train(samples):
 随从吕旷令西凉姜布有荆州，箭政跪身，军马挺南。曹操大不告离，何守而降。先主非士，又命关看。
 ```
 
+</v-click>
+
 ---
 
 # 让机器写剧本
 
-将《老友记》全 10 季剧本，约 4.5MB，让机器从 0 - 1 学习：
+将[《老友记》全 10 季剧本](https://github.com/fangj/friends)，约 4.5MB，让机器从 0 - 1 学习：
+
+<v-click>
 
 ```
 [Scene: Chandler and Joey's, Phoebe is answering from some gateen, the same assarent duck is
@@ -383,11 +389,16 @@ button, fine. What are you doing?
 Ross: Da me. (Pretends in door) I decided to cold use that.
 Rachel: Whoa, whoa whoa, day! What a duving dollars!!!!
 ```
+
+</v-click>
+
 ---
 
 # 让机器写 Golang
 
 将 Kubernetes 整个仓库中的源码，约169MB，让机器从 0 - 1 学习：
+
+<v-click>
 
 ```go
 // NewPathParameter address taints of Server automatically.
@@ -413,6 +424,8 @@ func (s *symconfig) DescribeRestore(ctx context.Context, m file.Info) (bool, err
 	return nil
 }
 ```
+
+</v-click>
 
 ---
 
