@@ -254,6 +254,8 @@ layout: two-cols
 
 ![language-model](/language-model-example.png)
 
+> 注：图中例子是词级别，字级别类似
+
 ---
 layout: two-cols
 ---
