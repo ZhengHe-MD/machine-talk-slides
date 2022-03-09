@@ -96,7 +96,7 @@ def utter_next_sentence(input_sentence: str) -> str:
     next_word = utter_next_word(prev_word)
     sentence.append(next_word)
     while next_word != ".":
-        next_word = utter_next_word(prev_word)
+        next_word = utter_next_word(next_word)
         sentence.append(next_word)
         
     return ''.join(sentence)
