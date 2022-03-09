@@ -34,19 +34,22 @@ drawings:
 1. 🗣 第一个人随意说一句话
 2. 🔗 剩下的人轮流接一句话
 
-<v-click>
+🔁
 
-## 问题
+## 问题 🤔
 
-* 每个人如何决定下句说什么
+<v-clicks>
 
-</v-click>
+- 我们是如何决定下句说什么？
+- 我们的大脑有没可能是基于统计学工作的？
+
+</v-clicks>
 
 ---
 layout: center
 ---
 
-# 如何实现「让机器人接话」？
+# 实现「让机器接话」
 只考虑文本不考虑语音
 
 ---
@@ -111,8 +114,6 @@ def utter_next_sentence(input_sentence: str) -> str:
 "好世界."
 ```
 
-> 🤔 「每次说一句话」与「每次说一个字」有什么区别
-
 ---
 
 # 离我们的期望有多远？
@@ -136,7 +137,12 @@ layout: two-cols
 }
 </style>
 
-# 每次说一个字
+# <uim-rocket class="text-3xl text-black-400 mx-2" /> 「字级别模型」
+字级别 (char-level) 与词级别 (word-level) 原理类似
+
+## 每次说一个字
+
+<br>
 
 ```python
 char_level_model = load("model.pt")
@@ -157,13 +163,12 @@ def utter_next_word(input_word: str) -> str:
 "的"
 ```
 
-<uim-rocket class="text-3xl text-black-400 mx-2" /> 实现一个「字级别模型」(char-level model)
-
-> 词级别 (word-level) 模型原理类似。
 
 ::right::
 
-# 每次说一句话
+## 每次说一句话
+
+<br>
 
 ```python
 char_level_model = load("model.pt")
@@ -199,7 +204,7 @@ def utter_next_sentence(input_sentence: str) -> str:
 <v-clicks>
 
 - 💡 人是如何学习语言的？
-- 🗣️ 可不可以直接跟机器说，让它学？ 
+- 🗣️ 可不可以直接跟机器说，让它学？<span style="font-size: 14px"> 🤔 这个方案有什么问题</span>
 - 📖 可不可以直接给机器书，让它看？
 
 </v-clicks>
@@ -221,11 +226,15 @@ def utter_next_sentence(input_sentence: str) -> str:
 在给机器看书之前，得先教会它怎么识字？
 
 - 要求：字与字不同；一定的维度；支持浮点运算；
-- 做法：建立词表；向量编码 → One-hot encoding；
+- 做法：建立字表；向量编码 → One-hot encoding；
 
 ![one-hot-encoding](/one-hot-encoding-char-level.png)
 
+<v-click>
+
 > 🤔 如果是中文会有什么问题？
+
+</v-click>
 
 ---
 layout: two-cols
@@ -233,17 +242,17 @@ layout: two-cols
 
 # 语言建模
 
-机器如何学习字之间的关系？
+机器最终学到的东西是什么？
 
-## 例 1：
-- "天" -> "哪"
+### 例 1：
+- "我的天" -> "哪"
 - "天安" -> "门"
-## 例 2:
-- "My" -> "God"
-- "MyS" -> "QL"
-## 例 3:
-- "go" -> "func"
-- "if err" -> "!= nil"
+### 例 2:
+- "My" -> " God"
+- "MySQL" -> " database"
+### 例 3:
+- "go" -> " func"
+- "if err" -> " != nil"
 
 ::right::
 
@@ -260,17 +269,27 @@ layout: two-cols
 layout: two-cols
 ---
 
-# 模型究竟是什么
+# 模型是什么
+
+<v-clicks>
 
 - 是一个巨大的函数
 - 参数可以达到万亿
 - 构成的函数都可导
-- 输入是一组向量 <br>(如 "Hello." 对应的 one-hot encoding)
-- 输出是一组向量 <br>(如 "world!" 对应的 one-hot encoding)
-- 通过计算导数，不断地调整函数参数 <br> → 最终收敛到 (局部) 最优解
+- 输入是一个或一组向量 <br>(如 "Hello." 对应的 one-hot encoding)
+- 输出是一个或一组向量 <br>(如 "world!" 对应的 one-hot encoding)
+- 通过计算优化目标函数对参数的导数 <br> 不断地调整函数参数 <br> → 最终收敛到 (局部) 最优解
+
+</v-clicks>
 
 
 ::right::
+
+<br>
+<br>
+<br>
+<br>
+<br>
 
 <img src="/convex-optimization.png"/>
 
@@ -278,10 +297,16 @@ layout: two-cols
 layout: two-cols
 ---
 
-# 如何学习 → 训练模型
+# 如何学习 - 训练模型
+<br>
 
-- 样本输入："Hello, "
-- 样本值：  "world!"
+```
+input: H, e, l, l, o, w, o, r, l, d
+
+       ↓  ↓  ↓  ↓  ↓  ↓  ↓  ↓  ↓  ↓
+
+value: e, l, l, o, w, o, r, l, d, !  
+```
 
 <br>
 
@@ -307,8 +332,7 @@ graph RL
 <br>
 <br>
 <br>
-
-### 伪代码
+<br>
 
 ```python
 def train(samples):
@@ -323,13 +347,27 @@ def train(samples):
 
 ---
 
+# 如何学习 - 目标函数
+
+
+- 输入是一个向量，输入字的 one-hot encoding
+- 输出是一个向量，输出字在词表上的概率分布
+- 答案是一个向量，答案字的 one-hot encoding
+
+🤔 如果把 one-hot encoding 就看作是一个概率分布？
+
+![one-hot-encoding-vs-probability-distribution](/one-hot-vs-pd.png)
+
+
+---
+
 # 样本数据
 
 > 数据片段：Hackers need to understand the theory of computation about as much as painters need to understand paint chemistry.
 >
 > --- 摘自 《hackers and painters》
 
-| 样本输入 | 样本值 |
+| **Inputs** | **Values** |
 |----------|--------|
 | Hackers need |  to understand |
 | ackers need t | o understand t |
@@ -340,7 +378,7 @@ def train(samples):
 
 # Andrej Karpathy 的实验
 
-[The Unreasonable Effectiveness of Recurrent Neural Networs](http://karpathy.github.io/2015/05/21/rnn-effectiveness/)
+[The Unreasonable Effectiveness of Recurrent Neural Networks](http://karpathy.github.io/2015/05/21/rnn-effectiveness/)
 
 ![RNN](/rnn.png)
 
@@ -439,7 +477,6 @@ func (s *symconfig) DescribeRestore(ctx context.Context, m file.Info) (bool, err
 ## 限定领域
 
 * [九歌](http://jiuge.thunlp.org/)
-* [OpenAI examples](https://beta.openai.com/examples)
 
 ---
 
