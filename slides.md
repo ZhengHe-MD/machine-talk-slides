@@ -175,7 +175,7 @@ def utter_next_sentence(input_sentence: str) -> str:
     next_word = char_level_model.predict(prev_word)
     sentence.append(next_word)
     while next_word != EOF:
-        next_word = char_level_model.predict(prev_word)
+        next_word = char_level_model.predict(next_word)
         sentence.append(next_word)
         
     return ''.join(sentence)
