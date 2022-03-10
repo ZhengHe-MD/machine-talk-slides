@@ -181,8 +181,8 @@ def utter_next_sentence(input_sentence: str) -> str:
 <v-clicks>
 
 - 💡 人是如何学习语言的？
-- 🗣️ 可不可以直接跟机器说，让它学？<span style="font-size: 14px"> 🤔 这个方案有什么问题</span>
-- 📖 可不可以直接给机器书，让它看？
+- 🗣️ 可不可以直接跟机器说，让它学？
+- 📖 可不可以直接给机器书，让它看？⬅️
 
 </v-clicks>
 
