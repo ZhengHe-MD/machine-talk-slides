@@ -254,7 +254,7 @@ layout: two-cols
 - 参数可以达到万亿
 - 构成的函数都可导
 - 输入是一个或一组向量 <br>(如 "Hello." 对应的 one-hot encoding)
-- 输出是一个或一组向量 <br>(如 "world!" 对应的 one-hot encoding)
+- 输出是一个或一组向量 (这个表达并不准确) <br>(如 "world!" 对应的 one-hot encoding)
 
 </v-clicks>
 
