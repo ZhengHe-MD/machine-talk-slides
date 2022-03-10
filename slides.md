@@ -209,7 +209,7 @@ def utter_next_sentence(input_sentence: str) -> str:
 
 <v-click>
 
-> 🤔 如果是中文会有什么问题？
+> 🤔 使用这种方法让机器学习「中文」和「英文」有什么区别？
 
 </v-click>
 
@@ -255,7 +255,6 @@ layout: two-cols
 - 构成的函数都可导
 - 输入是一个或一组向量 <br>(如 "Hello." 对应的 one-hot encoding)
 - 输出是一个或一组向量 <br>(如 "world!" 对应的 one-hot encoding)
-- 通过计算优化目标函数对参数的导数 <br> 不断地调整函数参数 <br> → 最终收敛到 (局部) 最优解
 
 </v-clicks>
 
@@ -303,7 +302,6 @@ graph RL
     dy["distance(样本值 - 预测值)"] --调整--> M[模型]
 ```
 
-
 ::right::
 
 <br>
@@ -324,12 +322,11 @@ def train(samples):
 
 ---
 
-# 如何学习 - 目标函数
+# 如何学习 - 训练目标
 
-
-- 输入是一个向量，输入字的 one-hot encoding
+- 输入是一个向量，输入字，如 'H' 的 one-hot encoding
 - 输出是一个向量，输出字在词表上的概率分布
-- 答案是一个向量，答案字的 one-hot encoding
+- 答案是一个向量，答案字，如 'e' 的 one-hot encoding
 
 🤔 如果把 one-hot encoding 就看作是一个概率分布？
 
